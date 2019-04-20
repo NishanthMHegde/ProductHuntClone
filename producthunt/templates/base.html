@@ -30,6 +30,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
+      <a class="nav-item nav-link" href="{% url 'create' %}"> <img src = "{% static 'add.png' %}" height=20 width =20 /> </a>
       <a class="nav-item nav-link" href="javascript:{document.getElementById('logout_form').submit()}" onclick = "">Logout</a>
       <form method = "POST" id = "logout_form" action = "{% url 'logout' %}">
         {% csrf_token %}
