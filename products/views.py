@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import ProductsModel
 from django.utils import timezone
@@ -30,3 +30,8 @@ def create(request):
 
 	else:
 		return render(request,'products/create.html')
+
+
+def detail(request,product_id):
+	product = get_object_or_404(ProductsModel, pk = product_id)
+	return render(request,'products/detail.html',{"product": product})
