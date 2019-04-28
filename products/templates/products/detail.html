@@ -18,7 +18,7 @@
 	<img src = "{{ product.image.url}}" class = "img-fluid" />
 </div>
 <div class = "col-4">
-	<a href = ""><button class = "btn btn-primary btn-lg btn-block"> <img src = "{% static 'thumb-up.png' %}" height =30 width=30/> Upvote {{product.votes_total}}</button></a>
+	<a href = "javascript:{document.getElementById('upvote').submit()}"><button class = "btn btn-primary btn-lg btn-block"> <img src = "{% static 'thumb-up.png' %}" height =30 width=30/> Upvote {{product.votes_total}}</button></a>
 	</div>
 	</div>
 
@@ -39,4 +39,9 @@
 
 	</div>
 	</div>
+
+<form id = "upvote" method = "POST" action = "{%  url 'upvote' product.id %}">
+	{% csrf_token %}
+	<input type = "hidden" />
+</form>
 {% endblock %}

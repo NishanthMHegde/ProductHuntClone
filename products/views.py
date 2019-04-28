@@ -24,7 +24,7 @@ def create(request):
 			product.publication_date = timezone.datetime.now()
 			product.hunter = request.user
 			product.save()
-			return redirect('home')
+			return redirect('/products/' + str(product.id))
 		else:
 			return render(request,'products/create.html', {'error': 'Please fill in all the fields'})
 
@@ -35,3 +35,11 @@ def create(request):
 def detail(request,product_id):
 	product = get_object_or_404(ProductsModel, pk = product_id)
 	return render(request,'products/detail.html',{"product": product})
+
+@login_required
+def upvote(request,product_id):
+	if request.method == "POST":
+		product = get_object_or_404(ProductsModel, pk = product_id)
+		product.votes_total = product.votes_total + 1
+		product.save()
+		return redirect('/products/' + str(product.id))
