@@ -14,7 +14,7 @@
 		<h1> {{product.title}} </h1>
 		<h2> {{product.summary}} </h2>
 	</div>
-	<div class = "col-3" onclick = "window.location = '{%url 'detail' product.id %}';" style = "cursor: pointer;">
+	<div class = "col-3" >
 		<a href = "javascript:{document.getElementById('upvote{{product_id}}').submit()}"><button class = "btn btn-primary btn-lg btn-block"> <img src = "{% static 'thumb-up.png' %}" height =30 width=30/> Upvote {{product.votes_total}}</button></a>
 	</div>
 
