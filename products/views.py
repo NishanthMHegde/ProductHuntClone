@@ -5,7 +5,9 @@ from django.utils import timezone
 # Create your views here.
 
 def home(request):
-	return render(request,'products/home.html')
+	products = ProductsModel.objects
+
+	return render(request,'products/home.html',{'products': products})
 
 @login_required
 def create(request):

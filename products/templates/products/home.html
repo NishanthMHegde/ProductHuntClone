@@ -2,6 +2,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Home!!!!!!!!
+{% load staticfiles %}
+{% for product in products.all %}
+
+<div class = "row pb-3">
+	<div class="col-2" onclick = "window.location = '{%url 'detail' product.id %}';" style = "cursor: pointer;" >
+		<img src = "{{ product.image.url}}" class = "img-fluid" />
+	</div>
+
+	<div class = "col-7" onclick = "window.location = '{%url 'detail' product.id %}';" style = "cursor: pointer;">
+		<h1> {{product.title}} </h1>
+		<h2> {{product.summary}} </h2>
+	</div>
+	<div class = "col-3" onclick = "window.location = '{%url 'detail' product.id %}';" style = "cursor: pointer;">
+		<a href = "javascript:{document.getElementById('upvote{{product_id}}').submit()}"><button class = "btn btn-primary btn-lg btn-block"> <img src = "{% static 'thumb-up.png' %}" height =30 width=30/> Upvote {{product.votes_total}}</button></a>
+	</div>
+
+</div>
+<form id = "upvote{{product_id}}" method = "POST" action = "{%  url 'upvote' product.id %}">
+	{% csrf_token %}
+	<input type = "hidden" />
+</form>
+{% endfor %}
 {% endblock %}
 
